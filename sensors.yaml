@@ -1,0 +1,63 @@
+- platform: yr
+
+- platform: yweather
+  monitored_conditions:
+  - weather
+  - weather_current
+  - temp_min
+  - temp_max
+  - wind_speed
+  - pressure
+  - visibility
+  - humidity
+  - temperature
+  
+#- platform: plex
+#- platform: pollen
+#  zip_code: "98178"
+#  monitored_conditions:
+#  - disease_average_forecasted
+    
+- platform: waze_travel_time
+  origin: !secret waze_home
+  destination: !secret waze_work
+  region: 'US'
+  name: 'Morning Commute'
+    
+- platform: waze_travel_time
+  origin: !secret waze_work
+  destination: !secret waze_home
+  region: 'US'
+  name: 'Evening Commute'
+    
+- platform: sonarr
+  api_key: !secret jarvis_sonarr_key
+  host: 10.0.0.30
+  port: 8989
+  days: 2
+  name: 'Jarvis'
+  
+#- platform: deluge
+#  host: 10.0.0.148
+#  port: 38081
+#  name: Deluge
+#  password: deluge
+#  monitored_variables:
+#    - 'current_status'
+  
+#- platform: wemo
+#  static:
+#    - 10.0.0.154
+
+#- platform: speedtest
+#  minute: 22
+#  hour:
+#   - 1
+#   - 13
+#  monitored_conditions:
+#   - download
+#   - upload
+
+#- platform: ups
+#  username: "wooska"
+#  password: !secret ups_password

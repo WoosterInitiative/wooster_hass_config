@@ -1,0 +1,152 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: !secret home_lat
+  longitude: !secret home_lon
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: !secret home_ele
+  # metric for Metric, imperial for Imperial
+  unit_system: imperial
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: !secret home_tz
+  # Customization file
+  customize: !include customize.yaml
+  auth_providers:
+    - type: homeassistant
+    - type: legacy_api_password
+
+# Show links to resources in log and frontend
+# introduction:
+
+# Enables the frontend
+frontend:
+
+# Enables configuration UI
+config:
+
+http:
+  # Secrets are defined in the file secrets.yaml
+  api_password: !secret api_password
+  # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+  # base_url: example.duckdns.org:8123
+
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+updater:
+  # Optional, allows Home Assistant developers to focus on popular components.
+  # include_used_components: true
+
+# Discover some devices automatically
+#discovery:
+
+mqtt:
+  broker: mosquitto
+  username: !secret mqtt_user
+  password: !secret mqtt_pass
+
+wemo:
+  static:
+    - 10.0.0.154
+    
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Enables support for tracking state changes over time
+history:
+
+# View all events in a logbook
+logbook:
+
+recorder:
+  db_url: !secret mariadb_db
+
+# Manual Switches
+input_boolean:
+  houseguest:
+    name: House Guests
+
+device_tracker:
+ - platform: owntracks_http
+
+# Nest
+nest:
+  client_id: !secret nest_cid
+  client_secret: !secret nest_sec
+
+# notify:
+#   - name: hass_slack
+#     platform: slack
+#     api_key: !secret slack_key #key is not in secret file right now
+#     default_channel: "#random"
+
+# Enables a map showing the location of tracked devices
+map:
+
+# Track the sun
+sun:
+
+# Weather prediction
+sensor:
+  - platform: yweather
+  # - platform: tautulli
+  #   api_key: !secret tautulli_key
+  #   host: 10.0.0.30
+  #   port: 8181
+
+# Text to speech
+tts:
+  - platform: google
+
+cast:
+  media_player:
+    - host: 10.0.0.199
+    - name: Living Room
+
+media_player:
+  - platform: samsungtv
+    host: 10.0.0.94
+    name: Big TV
+  - platform: universal
+    name: Big Screen
+    children:
+    - media_player.living_room
+    - media_player.big_tv
+    commands:
+      turn_on:
+        service: media_player.turn_on
+        data:
+          entity_id: media_player.living_room
+      turn_off:
+        service: media_player.turn_off
+        data:
+          entity_id: media_player.big_tv
+      volume_up:
+        service: media_player.volume_up
+        data:
+          entity_id: media_player.big_tv
+      volume_down:
+        service: media_player.volume_down
+        data:
+          entity_id: media_player.big_tv
+      volume_mute:
+        service: media_player.volume_mute
+        data:
+          entity_id: media_player.big_tv
+    attributes:
+      state: media_player.big_tv
+      source: media_player.living_room|source
+      source_list: media_player.big_tv|source_list
+  - platform: plex
+
+# Cloud
+cloud:
+
+#secret: !include secrets.yaml
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+# sensor: !include sensors.yaml
