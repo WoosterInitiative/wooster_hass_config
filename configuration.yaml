@@ -142,6 +142,20 @@ media_player:
       source_list: media_player.big_tv|source_list
   - platform: plex
 
+switch:
+  - platform: template
+    switches:
+      houseguest:
+        value_template: "{{ is_state('input_boolean.houseguest', 'on') }}"
+        turn_on:
+          service: input_boolean.turn_on
+          data:
+            entity_id: input_boolean.houseguest
+        turn_off:
+          service: input_boolean.turn_off
+          data:
+            entity_id: input_boolean.houseguest
+
 # Cloud
 cloud:
 

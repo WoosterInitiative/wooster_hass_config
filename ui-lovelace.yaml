@@ -30,6 +30,31 @@ views:
           - zone.home
         aspect_ratio: 100%
         default_zoom: 15
+      - type: glance
+        # title: Glance Card
+        entities:
+          - entity: binary_sensor.home_away
+            icon: mdi:car-connected
+            name: Home
+          - entity: switch.corner_lamp
+            tap_action: toggle
+            icon: mdi:flash
+          - entity: switch.houseguest
+            name: House Guest
+            icon: mdi:account-plus
+              # account-box-outline
+            tap_action: toggle
+        # icon: mdi:car-connected
+
+  # - title: test
+  #   panel: true
+  #   cards:
+  #     - type: vertical-stack
+  #       cards:
+  #         - type: glance
+  #           entities:
+  #             - sun.sun
+
       # - type: media-control
       #   entity: media_player.big_tv
       # - type: media-control
