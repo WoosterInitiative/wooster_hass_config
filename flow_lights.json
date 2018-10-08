@@ -1,0 +1,213 @@
+[
+    {
+        "id": "d36c43a9.dd975",
+        "type": "tab",
+        "label": "Lights",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "a16c955c.aa5218",
+        "type": "inject",
+        "z": "d36c43a9.dd975",
+        "name": "Light Only",
+        "topic": "",
+        "payload": "light-only",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 210,
+        "y": 120,
+        "wires": [
+            [
+                "b6e4dac8.be3a88"
+            ]
+        ]
+    },
+    {
+        "id": "b6e4dac8.be3a88",
+        "type": "light-scheduler",
+        "z": "d36c43a9.dd975",
+        "settings": "66b91e1e.b7aec8",
+        "events": "[]",
+        "topic": "",
+        "name": "Schedule",
+        "onPayload": "ON",
+        "onPayloadType": "str",
+        "offPayload": "OFF",
+        "offPayloadType": "str",
+        "onlyWhenDark": true,
+        "sunElevationThreshold": 6,
+        "sunShowElevationInStatus": true,
+        "outputfreq": "output.statechange",
+        "x": 440,
+        "y": 120,
+        "wires": [
+            [
+                "e69c2967.8356d"
+            ]
+        ]
+    },
+    {
+        "id": "e69c2967.8356d",
+        "type": "switch",
+        "z": "d36c43a9.dd975",
+        "name": "On/Off",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "ON",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "ON",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 590,
+        "y": 120,
+        "wires": [
+            [
+                "cf3b9364.42185"
+            ],
+            [
+                "5b05ea9.456e894"
+            ]
+        ]
+    },
+    {
+        "id": "cf3b9364.42185",
+        "type": "api-call-service",
+        "z": "d36c43a9.dd975",
+        "name": "Lamp On",
+        "server": "24cb9e76.dcc19a",
+        "service_domain": "switch",
+        "service": "turn_on",
+        "data": "{   \"entity_id\": \"switch.corner_lamp\" }",
+        "mergecontext": "",
+        "x": 760,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5b05ea9.456e894",
+        "type": "api-call-service",
+        "z": "d36c43a9.dd975",
+        "name": "Lamp Off",
+        "server": "24cb9e76.dcc19a",
+        "service_domain": "switch",
+        "service": "turn_off",
+        "data": "{   \"entity_id\": \"switch.corner_lamp\" }",
+        "mergecontext": "",
+        "x": 760,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "88a6a552.0d0818",
+        "type": "inject",
+        "z": "d36c43a9.dd975",
+        "name": "On",
+        "topic": "",
+        "payload": "ON",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 230,
+        "y": 80,
+        "wires": [
+            [
+                "b6e4dac8.be3a88"
+            ]
+        ]
+    },
+    {
+        "id": "e3455cfc.74f3",
+        "type": "inject",
+        "z": "d36c43a9.dd975",
+        "name": "Off",
+        "topic": "",
+        "payload": "OFF",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 230,
+        "y": 40,
+        "wires": [
+            [
+                "b6e4dac8.be3a88"
+            ]
+        ]
+    },
+    {
+        "id": "8458a5f4.09ee98",
+        "type": "inject",
+        "z": "d36c43a9.dd975",
+        "name": "Auto",
+        "topic": "",
+        "payload": "AUTO",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 230,
+        "y": 200,
+        "wires": [
+            [
+                "b6e4dac8.be3a88"
+            ]
+        ]
+    },
+    {
+        "id": "ac653139.5899b8",
+        "type": "inject",
+        "z": "d36c43a9.dd975",
+        "name": "Schedule Only",
+        "topic": "",
+        "payload": "schedule-only",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 200,
+        "y": 160,
+        "wires": [
+            [
+                "b6e4dac8.be3a88"
+            ]
+        ]
+    },
+    {
+        "id": "66b91e1e.b7aec8",
+        "type": "light-scheduler-settings",
+        "z": "",
+        "name": "Skyway House",
+        "latitude": "47.4917",
+        "longitude": "-122.2354"
+    },
+    {
+        "id": "24cb9e76.dcc19a",
+        "type": "server",
+        "z": "",
+        "name": "Home Assistant",
+        "legacy": false
+    }
+]
