@@ -77,6 +77,11 @@ nest:
   client_id: !secret nest_cid
   client_secret: !secret nest_sec
 
+panel_iframe:
+  nodered:
+    title: Node-RED
+    url: 'https://nodered.wooster.xyz'
+
 # notify:
 #   - name: hass_slack
 #     platform: slack
