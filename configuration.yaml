@@ -48,9 +48,10 @@ mqtt:
   username: !secret mqtt_user
   password: !secret mqtt_pass
 
-wemo:
-  static:
-    - 10.0.0.154
+### --- no wemo devices setup at this time - 2019-01-02
+# wemo:
+#   static:
+#     - 10.0.0.154
     
 # Allows you to issue voice commands from the frontend in enabled browsers
 conversation:

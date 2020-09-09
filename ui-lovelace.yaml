@@ -6,12 +6,14 @@ title: Home
 views:
   - title: Home
     cards:
+      ###--- Wavy's Camera ---###
       - type: picture-entity
         title: Wavy's Room
         entity: camera.wavys_room
         camera_image: camera.wavys_room
         show_info: true
         tap_action: dialog
+      ###--- Switch Card ---###
       - type: entities
         # show_header_toggle: false
         show_state: false
@@ -21,6 +23,7 @@ views:
             icon: mdi:account-box-outline
         # card:
         #   - type: glance
+      ###--- TV Card ---###
       - type: media-control
         entity: media_player.big_screen
       - type: map
@@ -30,6 +33,7 @@ views:
           - zone.home
         aspect_ratio: 100%
         default_zoom: 15
+      ###--- Glance Card ---###
       - type: glance
         # title: Glance Card
         entities:
@@ -45,6 +49,7 @@ views:
               # account-box-outline
             tap_action: toggle
         # icon: mdi:car-connected
+      ###--- Catch all "Monster Card" ---###
       - type: custom:monster-card
         card:
           type: glance
@@ -54,11 +59,18 @@ views:
           exclude:
             - domain: group
             - domain: zone
+      ###--- Thermostat Card ---###
       - type: custom:thermostat-card
         title: Dining Room
         entity: climate.dining_room
+        hvac:
+          states:
+            'Off': 'off'
+            'Cooling': 'cool'
+            'Heating': 'heat'
+          attribute: operation_mode
 
-###--- Resourced for custom cards
+###--- Resources for custom cards
 resources:
   - url: /local/custom-lovelace/monster-card/monster-card.js?v=1
     type: js
